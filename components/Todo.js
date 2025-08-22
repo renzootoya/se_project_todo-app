@@ -6,7 +6,7 @@ export class Todo {
 
   _setupEventListeners() {
     const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
-    const todoLabel = this._todoElement.querySelector(".todo__label");
+
     const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
     todoCheckboxEl.addEventListener("change", () => {
@@ -19,7 +19,7 @@ export class Todo {
     });
   }
 
-  _generetedCheckboEl() {
+  __generateCheckboxEl() {
     const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     const todoLabel = this._todoElement.querySelector(".todo__label");
     todoCheckboxEl.checked = this._data.completed;
@@ -34,11 +34,9 @@ export class Todo {
       .cloneNode(true);
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
-    const todoDate = this._todoElement.querySelector(".todo__date");
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
     todoNameEl.textContent = this._data.name;
-    this._generetedCheckboEl();
+    this.__generateCheckboxEl();
     this._setupEventListeners();
 
     return this._todoElement;
