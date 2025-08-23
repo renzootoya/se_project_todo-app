@@ -51,7 +51,7 @@ const setEventListeners = (formElement, settings) => {
     settings.submitButtonSelector
   );
 
-  toggleButtonState(this._inputList, this._buttonElement, this._settings);
+  toggleButtonState(inputList, buttonElement, settings);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
