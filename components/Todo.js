@@ -28,16 +28,28 @@ export class Todo {
     todoLabel.setAttribute("for", `todo-${this._data.id}`);
   }
 
+  _formatDate(dateValue) {
+    
+    if (!dateValue || isNaN(new Date(dateValue))) {
+      return "No date set";
+    }
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateValue).toLocaleDateString('en-US', options); 
+  }
+
   getview() {
     this._todoElement = this._templateElement.content
       .querySelector(".todo")
       .cloneNode(true);
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
-     const todoDate = this._todoElement.querySelector(".todo__date");
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
+    const todoDateEl = this._todoElement.querySelector(".todo__date"); 
     
     todoNameEl.textContent = this._data.name;
+
+    
+    todoDateEl.textContent = this._formatDate(this._data.date);
+
     this.__generateCheckboxEl();
     this._setupEventListeners();
 
@@ -46,3 +58,4 @@ export class Todo {
 }
 
 export default Todo;
+
