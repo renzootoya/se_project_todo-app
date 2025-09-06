@@ -7,6 +7,17 @@ export class Todo {
   }
 
   _setupEventListeners() {
+    this._deleteBtnEl = this._todoElement.querySelector(".todo__delete-btn");
+    this._generateCheckboxEl = this._todoElement.querySelector(".todo__completed");
+
+    this._deleteBtnEl.addEventListener("click", this._handleDelete);
+    this._generateCheckboxEl.addEventListener("change", () => {
+      this._toggleComplete();
+      this._handleCheck(this._data.completed);
+    });
+}
+
+  _setEventListeners() {
     const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
 
     const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
@@ -23,7 +34,7 @@ export class Todo {
     this._handleDelete(this._data.completed);
   }
 
-  __generateCheckboxEl() {
+  _generateCheckboxEl() {
     const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     const todoLabel = this._todoElement.querySelector(".todo__label");
     todoCheckboxEl.checked = this._data.completed;
@@ -54,7 +65,7 @@ export class Todo {
     
     todoDateEl.textContent = this._formatDate(this._data.date);
 
-    this.__generateCheckboxEl();
+    this._generateCheckboxEl();
     this._setupEventListeners();
 
     return this._todoElement;
