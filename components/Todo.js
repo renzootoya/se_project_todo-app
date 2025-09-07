@@ -10,18 +10,16 @@ export class Todo {
     this._deleteBtnEl = this._todoElement.querySelector(".todo__delete-btn");
     this._generateCheckboxEl = this._todoElement.querySelector(".todo__completed");
 
-    this._generateCheckboxEl.addEventListener("change", () => {
-      this._data.completed = !this._data.completed;
-      console.log(this._data.completed);
-    });
-
     this._deleteBtnEl.addEventListener("click", () => {
       this._todoElement.remove();
+      this._handleDelete(this._data.completed);
     });
+
     this._generateCheckboxEl.addEventListener("change", () => {
+       this._data.completed = !this._data.completed;
+      console.log(this._data.completed);
       this._toggleCompletion();
       this._handleCheck(this._data.completed);
-      this._handleDelete(this._data.completed);
     });
 }
 
