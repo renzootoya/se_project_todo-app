@@ -6,33 +6,41 @@ export class Todo {
     this._handleDelete = handleDelete;
   }
 
-  _setupEventListeners() {
+  _setEventListeners() {
     this._deleteBtnEl = this._todoElement.querySelector(".todo__delete-btn");
     this._generateCheckboxEl = this._todoElement.querySelector(".todo__completed");
 
-    this._deleteBtnEl.addEventListener("click", this._handleDelete);
     this._generateCheckboxEl.addEventListener("change", () => {
-      this._toggleComplete();
-      this._handleCheck(this._data.completed);
-    });
-}
-
-  _setEventListeners() {
-    const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
-
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
-
-    todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
       console.log(this._data.completed);
     });
 
-    todoDeleteBtn.addEventListener("click", () => {
+    this._deleteBtnEl.addEventListener("click", () => {
       this._todoElement.remove();
     });
-    this._handleCheck(this._data.completed);
-    this._handleDelete(this._data.completed);
-  }
+    this._generateCheckboxEl.addEventListener("change", () => {
+      this._toggleCompletion();
+      this._handleCheck(this._data.completed);
+      this._handleDelete(this._data.completed);
+    });
+}
+
+//  _setEventListeners() {
+//    const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
+//
+//    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
+//
+//    todoCheckboxEl.addEventListener("change", () => {
+//      this._data.completed = !this._data.completed;
+//      console.log(this._data.completed);
+//    });
+//
+//    todoDeleteBtn.addEventListener("click", () => {
+//      this._todoElement.remove();
+//   });
+//    this._handleCheck(this._data.completed);
+//    this._handleDelete(this._data.completed);
+//  }
 
   _generateCheckboxEl() {
     const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
@@ -41,6 +49,14 @@ export class Todo {
 
     todoCheckboxEl.id = `todo-${this._data.id}`;
     todoLabel.setAttribute("for", `todo-${this._data.id}`);
+  }
+
+  _toggleCompletion() {
+    this._completed = !this._completed;
+  }
+
+  _handleDelete() {
+    this._todoElement.remove();
   }
 
   _formatDate(dateValue) {
@@ -59,14 +75,15 @@ export class Todo {
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDateEl = this._todoElement.querySelector(".todo__date"); 
-    
+    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
     todoNameEl.textContent = this._data.name;
 
     
     todoDateEl.textContent = this._formatDate(this._data.date);
 
     this._generateCheckboxEl();
-    this._setupEventListeners();
+    this._setEventListeners();
+      
 
     return this._todoElement;
   }
