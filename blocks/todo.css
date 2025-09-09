@@ -7,6 +7,13 @@
   gap: 20px;
 }
 
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: transparent;
+}
+
 .todo__label {
   display: flex;
   gap: 12px;

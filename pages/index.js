@@ -19,8 +19,9 @@ function handleCheck(completed) {
 }
 
 function handleDelete(completed) {
+  todoCounter.updateTotal(false);
   if (completed) {
-    todoCounter.updateTotal(false);
+    todoCounter.updateCompleted(false);
   }
 }
 
@@ -49,31 +50,6 @@ const section = new Section({
 
 section.renderItems();
 
-
-
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
-
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
-
-function handleEscapeForm(evt) {
-  if (evt.key === "Escape") {
-    addTodoPopup.close();
-  }
-}
-
-addTodoButton.addEventListener("click", () => {
-  addTodoPopup.open();
-  document.addEventListener("keyup", handleEscapeForm);
-});
-
-addTodoCloseBtn.addEventListener("click", () => {
-  addTodoPopup.close();
-});
-
   addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const name = evt.target.name.value;
@@ -88,7 +64,7 @@ addTodoCloseBtn.addEventListener("click", () => {
 
   renderTodo(values);
   newTodoValidator.resetValidation();
-  closeModal(addTodoPopupEl);
+  addTodoPopup.close();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);

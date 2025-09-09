@@ -23,23 +23,6 @@ export class Todo {
     });
 }
 
-//  _setEventListeners() {
-//    const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
-//
-//    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
-//
-//    todoCheckboxEl.addEventListener("change", () => {
-//      this._data.completed = !this._data.completed;
-//      console.log(this._data.completed);
-//    });
-//
-//    todoDeleteBtn.addEventListener("click", () => {
-//      this._todoElement.remove();
-//   });
-//    this._handleCheck(this._data.completed);
-//    this._handleDelete(this._data.completed);
-//  }
-
   _generateCheckboxEl() {
     const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     const todoLabel = this._todoElement.querySelector(".todo__label");

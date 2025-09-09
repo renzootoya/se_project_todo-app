@@ -6,14 +6,16 @@ class Section {
  }
 
  renderItems() { 
-   this._items.forEach(item => {
-     this._renderer(item);
-   });
- }
- addItem(element) {
-   this._items.push(element);
-   this._renderer(element);
- }
+    this._items.forEach(item => {
+      const element = this._renderer(item);
+      this._container.append(element);
+    });
+  }
+   addItem(item) {
+    this._items.push(item);
+    const element = this._renderer(item);
+    this._container.append(element);
+  }
 }
 
 export default Section;
