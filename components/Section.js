@@ -5,16 +5,15 @@ class Section {
    this._container = document.querySelector(containerSelector);
  }
 
- renderItems() { 
-    this._items.forEach(item => {
-      const element = this._renderer(item);
-      this._container.append(element);
+    renderItems() {
+    this._items.forEach((item) => {
+      this._renderer(item);
     });
   }
-   addItem(item) {
+
+    addItem(item) {
     this._items.push(item);
-    const element = this._renderer(item);
-    this._container.append(element);
+    this._renderer(item);
   }
 }
 

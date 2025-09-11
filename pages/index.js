@@ -33,11 +33,17 @@ const renderTodo = (itemData) => {
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
   handleFormSubmit: (values) => {
+    todoCounter.updateTotal(true);
     const id = uuidv4();
     const newTodo = { ...values, id };
     section.addItem(newTodo);
     addTodoPopup.close();
   }
+});
+addTodoPopup.setEventListeners();
+
+addTodoButton.addEventListener("click", () => {
+  addTodoPopup.open();
 });
 
 const section = new Section({
@@ -49,23 +55,6 @@ const section = new Section({
 });
 
 section.renderItems();
-
-  addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
-
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-  const id = uuidv4();
-  const values = { name, date, id };
-  section.addItem(values);
-
-  renderTodo(values);
-  newTodoValidator.resetValidation();
-  addTodoPopup.close();
-});
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
